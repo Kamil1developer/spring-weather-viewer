@@ -1,12 +1,13 @@
 package com.example.weatherviewer.form;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class LoginForm {
+public class RegisterForm {
     private  String username;
     private  String password;
+    private  String repeatPassword;
+
 }
