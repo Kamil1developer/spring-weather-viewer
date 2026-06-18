@@ -3,6 +3,7 @@ package com.example.weatherviewer.controller;
 import com.example.weatherviewer.form.LoginForm;
 import com.example.weatherviewer.form.RegisterForm;
 import com.example.weatherviewer.service.AuthService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
+@RequiredArgsConstructor
 public class SignUpController {
-    private AuthService authService;
+    private final AuthService authService;
     @GetMapping("/sign-up")
     public String showSignInPage(Model model){
         model.addAttribute("registerForm", new RegisterForm());
