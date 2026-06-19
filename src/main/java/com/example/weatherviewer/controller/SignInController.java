@@ -33,7 +33,9 @@ public class SignInController {
         Optional<String> optionalMessage = mapper.resolveMessage(result);
 
         if (optionalMessage.isPresent()){
-            model.addAttribute()
+            String authMessage = optionalMessage.get();
+            model.addAttribute("authMessage", authMessage);
+            return "sign-in";
         }
         return "redirect:/home";
     }

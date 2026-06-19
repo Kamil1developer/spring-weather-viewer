@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Weather Viewer – Homepage</title>
@@ -16,7 +16,9 @@
         </a>
         <div class="d-flex align-items-center">
             <span class="navbar-text me-3">zhukovsd</span>
-            <button class="btn btn-outline-danger">Sign out</button>
+            <a th:href="@{/sign-in}" class="btn btn-outline-danger">
+                Sign out
+            </a>
         </div>
     </div>
 </nav>

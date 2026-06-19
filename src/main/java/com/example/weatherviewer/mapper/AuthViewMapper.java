@@ -12,8 +12,12 @@ public class AuthViewMapper {
 
     public Optional<String> resolveMessage(AuthResult currentResult){
         switch (currentResult){
-            case INVALID_PASSWORD -> Optional.of(AuthMessage.INVALID_PASSWORD.getMessage());
-            case INVALID_LOGIN -> Optional.of(AuthMessage.USER_NOT_FOUND.getMessage());
+            case INVALID_PASSWORD -> {
+                return Optional.of(AuthMessage.INVALID_PASSWORD.getMessage());
+            }
+            case INVALID_LOGIN -> {
+                return Optional.of(AuthMessage.USER_NOT_FOUND.getMessage());
+            }
         }
 
         return Optional.empty();

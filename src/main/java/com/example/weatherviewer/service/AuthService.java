@@ -23,12 +23,11 @@ public class AuthService {
         Optional<User> optionalUser = userRepository.findByLogin(loginForm.getUsername());
 
         if (optionalUser.isEmpty()){
-            return AuthResult.INVALID_PASSWORD;
+            return AuthResult.INVALID_LaZOGIN;
         }
 
         User user = optionalUser.get();
 
-        List<User> userList = userRepository.findAll();
 
         return isPasswordValid(user, loginForm);
     }
