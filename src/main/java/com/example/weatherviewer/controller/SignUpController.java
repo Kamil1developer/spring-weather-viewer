@@ -21,9 +21,7 @@ public class SignUpController {
     }
     @PostMapping("/sign-up")
     public String signUp(@ModelAttribute RegisterForm registerForm){
-        String username = registerForm.getUsername();
-        String password = registerForm.getPassword();
-        String repeatPassword = registerForm.getRepeatPassword();
+        authService.signUp(registerForm);
         return "redirect:/home";
     }
 }

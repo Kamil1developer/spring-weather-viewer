@@ -23,6 +23,7 @@ public class AuthService {
         Optional<User> optionalUser = userRepository.findByLogin(loginForm.getUsername());
 
         if (optionalUser.isEmpty()){
+            return AuthResult.INVALID_LOGIN;
         }
 
         User user = optionalUser.get();
@@ -32,12 +33,23 @@ public class AuthService {
     }
 
     @Transactional
-    public void signUp(RegisterForm registerForm){
-
+    public AuthResult signUp(RegisterForm registerForm){
+        return confirmPassword(registerForm);
     }
 
-    public void confirmPassword(){
+    @Transactional
+    public AuthResult confirmPassword(RegisterForm registerForm){
+        String username = registerForm.getUsername();
+        String password = registerForm.getPassword();
+        String repeatPassword = registerForm.getRepeatPassword();
 
+        if (password.equals(repeatPassword)){
+            userRepository.save(new User(username,password));
+        }
+        else{
+            return AuthResult.CONFIRM_PASSWORD_INVALID;
+        }
+        return AuthResult.CONFIRM_PASSWORD_CORRECT;
     }
 
     public AuthResult isPasswordValid(User user, LoginForm loginForm){

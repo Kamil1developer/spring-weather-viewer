@@ -27,7 +27,7 @@ public class DataBaseConfig {
         source.setDriverClassName("org.postgresql.Driver");
         source.setUrl("jdbc:postgresql://localhost:5432/app_db");
         source.setUsername("postgres");
-
+        source.setPassword("Kamal@123465");
         return source;
     }
 

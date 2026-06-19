@@ -27,4 +27,7 @@ public class UserRepository {
         return entityManager.createQuery("select u from User u", User.class)
                 .getResultList();
     }
+    public void save(User user){
+        entityManager.persist(user);
+    }
 }
