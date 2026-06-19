@@ -19,7 +19,6 @@ public class AuthViewMapper {
                 return Optional.of(AuthMessage.USER_NOT_FOUND.getMessage());
             }
         }
-
         return Optional.empty();
     }
 
