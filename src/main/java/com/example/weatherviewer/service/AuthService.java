@@ -23,7 +23,6 @@ public class AuthService {
         Optional<User> optionalUser = userRepository.findByLogin(loginForm.getUsername());
 
         if (optionalUser.isEmpty()){
-            return AuthResult.INVALID_LaZOGIN;
         }
 
         User user = optionalUser.get();
