@@ -15,7 +15,7 @@ public class GlobalExceptionsHandler {
     public String handleLoginAlreadyExists(LoginAlreadyExistsException ex, Model model){
         model.addAttribute("authMessage", ex.getMessage());
 
-        return "/sign-up";
+        return "sign-up";
 
     }
 }

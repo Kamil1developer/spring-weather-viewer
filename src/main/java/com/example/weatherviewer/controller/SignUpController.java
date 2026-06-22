@@ -32,7 +32,7 @@ public class SignUpController {
         if (optionalMessage.isPresent()){
             String authMessage = optionalMessage.get();
             model.addAttribute("authMessage", authMessage);
-            return "/sign-up";
+            return "sign-up-with-errors";
         }
         return "redirect:/home";
     }
