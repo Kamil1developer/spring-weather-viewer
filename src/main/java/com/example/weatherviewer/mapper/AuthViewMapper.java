@@ -18,6 +18,10 @@ public class AuthViewMapper {
             case INVALID_LOGIN -> {
                 return Optional.of(AuthMessage.USER_NOT_FOUND.getMessage());
             }
+            case CONFIRM_PASSWORD_INVALID -> {
+                return Optional.of(AuthMessage.CONFIRM_PASSWORD_INVALID.getMessage());
+            }
+
         }
         return Optional.empty();
     }
