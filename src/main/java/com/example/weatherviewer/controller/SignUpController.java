@@ -1,6 +1,7 @@
 package com.example.weatherviewer.controller;
 
 import com.example.weatherviewer.auth.AuthResult;
+import com.example.weatherviewer.exceptions.LoginAlreadyExistsException;
 import com.example.weatherviewer.form.LoginForm;
 import com.example.weatherviewer.form.RegisterForm;
 import com.example.weatherviewer.mapper.AuthViewMapper;
@@ -25,15 +26,20 @@ public class SignUpController {
     }
     @PostMapping("/sign-up")
     public String signUp(Model model, @ModelAttribute RegisterForm registerForm){
-        AuthResult authResult = authService.signUp(registerForm);
-        AuthViewMapper mapper = new AuthViewMapper(authResult);
-        Optional<String> optionalMessage = mapper.resolveMessage(authResult);
+        try {
+            AuthResult authResult = authService.signUp(registerForm);
+            AuthViewMapper mapper = new AuthViewMapper(authResult);
+            Optional<String> optionalMessage = mapper.resolveMessage(authResult);
 
-        if (optionalMessage.isPresent()){
-            String authMessage = optionalMessage.get();
-            model.addAttribute("authMessage", authMessage);
+                if (optionalMessage.isPresent()) {
+                    String authMessage = optionalMessage.get();
+                    model.addAttribute("authMessage", authMessage);
+                }
+                return "redirect:/home";
+        }
+        catch (LoginAlreadyExistsException e){
+            model.addAttribute("usernameAlreadyExists", true);
             return "sign-up-with-errors";
         }
-        return "redirect:/home";
     }
 }

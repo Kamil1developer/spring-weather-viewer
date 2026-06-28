@@ -60,7 +60,7 @@ public class AuthService {
         String storedPassword = user.getPassword();
 
         if (enteredPassword.equals(storedPassword)){
-                return AuthResult.CORRECT_PASSWORD;
+            return AuthResult.CORRECT_PASSWORD;
         };
 
         return AuthResult.INVALID_PASSWORD;

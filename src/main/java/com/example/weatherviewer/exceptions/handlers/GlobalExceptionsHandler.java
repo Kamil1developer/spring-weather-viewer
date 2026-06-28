@@ -13,15 +13,4 @@ import javax.security.auth.login.LoginException;
 @ControllerAdvice
 public class GlobalExceptionsHandler {
 
-    @ExceptionHandler(LoginAlreadyExistsException.class)
-    public String handleLoginAlreadyExists(LoginAlreadyExistsException ex,
-                                           Model model,
-                                           @ModelAttribute("registerForm") RegisterForm registerForm){
-        registerForm.setPassword(null);
-        registerForm.setRepeatPassword(null);
-        model.addAttribute("usernameAlreadyExists", true);
-
-        return "sign-up-with-errors";
-
-    }
 }
