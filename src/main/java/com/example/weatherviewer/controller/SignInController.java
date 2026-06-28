@@ -35,7 +35,7 @@ public class SignInController {
         if (optionalMessage.isPresent()){
             String authMessage = optionalMessage.get();
             model.addAttribute("authMessage", authMessage);
-            return "sign-in";
+            return "sign-in-with-errors";
         }
         return "redirect:/home";
     }
