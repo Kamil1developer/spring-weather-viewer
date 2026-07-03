@@ -19,15 +19,15 @@
 
     <div class="row justify-content-center">
         <div class="col-12 col-lg-4 col-md-6 col-sm-12">
-            <div class="alert alert-danger" role="alert"  th:if="${authMessage}">
-                Passwords don't match.
-            </div>
-        </div>
-    </div>
-
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-4 col-md-6 col-sm-12">
             <form th:action="@{/sign-up}" method="post" class="mt-4"  th:object="${registerForm}">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                        <div class="alert alert-danger" role="alert"  th:if="${authMessage}">
+                            Passwords don't match.
+                        </div>
+                    </div>
+                </div>
+
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <div class="input-group has-validation">

@@ -3,6 +3,7 @@ package com.example.weatherviewer.mapper;
 import com.example.weatherviewer.auth.AuthResult;
 import com.example.weatherviewer.messages.AuthMessage;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.BindingResult;
 
 import java.util.Optional;
 
@@ -10,20 +11,16 @@ import java.util.Optional;
 public class AuthViewMapper {
     private final AuthResult authResult;
 
-    public Optional<String> resolveMessage(AuthResult currentResult){
+    public void applyErrors(AuthResult currentResult, BindingResult bindingResult){
         switch (currentResult){
-            case INVALID_PASSWORD -> {
-                return Optional.of(AuthMessage.INVALID_PASSWORD.getMessage());
-            }
-            case INVALID_LOGIN -> {
-                return Optional.of(AuthMessage.USER_NOT_FOUND.getMessage());
+            case INVALID_PASSWORD, INVALID_LOGIN -> {
+                bindingResult.reject(null,"Invalid username or password");
             }
             case CONFIRM_PASSWORD_INVALID -> {
-                return Optional.of(AuthMessage.CONFIRM_PASSWORD_INVALID.getMessage());
+                bindingResult.reject(null,"Passwords don't match.");
             }
 
         }
-        return Optional.empty();
     }
 
 

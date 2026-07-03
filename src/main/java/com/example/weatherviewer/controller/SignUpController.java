@@ -33,15 +33,12 @@ public class SignUpController {
         try {
             AuthResult authResult = authService.signUp(registerForm);
             AuthViewMapper mapper = new AuthViewMapper(authResult);
-            Optional<String> optionalMessage = mapper.resolveMessage(authResult);
+            mapper.applyErrors(authResult, bindingResult);
 
-
-
-                if (optionalMessage.isPresent()) {
-                    String authMessage = optionalMessage.get();
-                    model.addAttribute("authMessage", authMessage);
-                }
-                return "redirect:/home";
+            if (bindingResult.hasErrors()) {
+                return "sign-up-with-errors";
+            }
+            return "redirect:/home";
         }
         catch (LoginAlreadyExistsException e){
             model.addAttribute("usernameAlreadyExists", true);
