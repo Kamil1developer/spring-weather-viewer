@@ -35,7 +35,7 @@
                                class="form-control is-invalid"
                                id="username"
                                th:field="*{username}"
-                               required>
+                               >
                         <div class="invalid-feedback"
                              th:if="${usernameAlreadyExists}">
                             Account with this email already exists.
@@ -49,7 +49,7 @@
                                class="form-control"
                                id="password"
                                th:field="*{password}"
-                               required>
+                               >
                         <div class="invalid-feedback">
                             Password must be at least 4 characters long.
                         </div>
@@ -61,7 +61,7 @@
                            class="form-control"
                            id="repeatPassword"
                            th:field="*{repeatPassword}"
-                           required>
+                           >
                 </div>
 
                 <input type="hidden" name="redirect_to" value="http://localhost/"/>
