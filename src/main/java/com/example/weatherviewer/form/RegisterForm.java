@@ -18,6 +18,7 @@ public class RegisterForm {
     private  String username;
 
     @NotBlank(message = "Пароль не должен быть пустым")
+    @Size(min = 4, message = "Пароль должен быть минимум 4 символа.")
     private  String password;
 
     @NotBlank(message = "Пароль не должен быть пустым")

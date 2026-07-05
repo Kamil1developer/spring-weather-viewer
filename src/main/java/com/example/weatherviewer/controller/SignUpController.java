@@ -31,6 +31,10 @@ public class SignUpController {
                          @Validated @ModelAttribute RegisterForm registerForm,
                          BindingResult bindingResult){
         try {
+            if (bindingResult.hasErrors()) {
+                return "sign-up-with-errors";
+            }
+
             AuthResult authResult = authService.signUp(registerForm);
             AuthViewMapper mapper = new AuthViewMapper(authResult);
             mapper.applyErrors(authResult, bindingResult);

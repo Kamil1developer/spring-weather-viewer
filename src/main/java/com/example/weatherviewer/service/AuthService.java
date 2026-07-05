@@ -4,7 +4,6 @@ import com.example.weatherviewer.auth.AuthResult;
 import com.example.weatherviewer.exceptions.LoginAlreadyExistsException;
 import com.example.weatherviewer.form.LoginForm;
 import com.example.weatherviewer.form.RegisterForm;
-import com.example.weatherviewer.messages.AuthMessage;
 import com.example.weatherviewer.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

@@ -17,7 +17,7 @@ public class AuthViewMapper {
                 bindingResult.reject(null,"Invalid username or password");
             }
             case CONFIRM_PASSWORD_INVALID -> {
-                bindingResult.reject(null,"Passwords don't match.");
+                bindingResult.reject(null,"Пароли не совпадают");
             }
 
         }

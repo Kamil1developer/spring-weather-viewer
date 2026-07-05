@@ -32,6 +32,9 @@ public class SignInController {
         String username = loginForm.getUsername();
         String password = loginForm.getPassword();
 
+        if (bindingResult.hasErrors()) {
+            return "sign-in-with-errors";
+        }
         AuthResult result = authService.signIn(loginForm);
         AuthViewMapper mapper = new AuthViewMapper(result);
         mapper.applyErrors(result, bindingResult);
