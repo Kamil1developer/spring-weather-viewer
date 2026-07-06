@@ -1,6 +1,7 @@
 package com.example.weatherviewer.repository.impl;
 
 import com.example.weatherviewer.entity.User;
+import com.example.weatherviewer.repository.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.Optional;
 @Repository
 
 
-public class JpaUserRepository {
+public class JpaUserRepository implements UserRepository {
     @PersistenceContext
     private  EntityManager entityManager;
 
