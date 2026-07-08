@@ -1,7 +1,6 @@
 package com.example.weatherviewer.mapper;
 
 import com.example.weatherviewer.auth.AuthResult;
-import com.example.weatherviewer.messages.AuthMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.BindingResult;
 

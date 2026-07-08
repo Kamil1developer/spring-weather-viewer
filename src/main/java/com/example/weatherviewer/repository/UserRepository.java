@@ -11,5 +11,5 @@ public interface UserRepository {
     public Optional<User> findByLogin(String userName);
 
     public List<User> findAll();
-    public void save(User user);
+    public User save(User user);
 }

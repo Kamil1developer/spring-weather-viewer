@@ -5,27 +5,30 @@ import com.example.weatherviewer.entity.User;
 import com.example.weatherviewer.repository.SessionRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
+@Repository
 public class JpaSessionRepository  implements SessionRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
 
     @Override
-    public Optional<User> findByLogin(String userName) {
+    public Optional<Session> findByUserId(Long userId) {
+        entityManager.createQuery("select s from sessions s where s.userId = :userId")
+                .setParameter("userId", userId)
+                .getResultStream()
+                .findFirst();
         return Optional.empty();
     }
 
     @Override
-    public List<User> findAll() {
-        return List.of();
-    }
-
-    @Override
-    public void save(Session session) {
-
+    public Session save(Session session) {
+        entityManager.persist(session);
+        return session;
     }
 }

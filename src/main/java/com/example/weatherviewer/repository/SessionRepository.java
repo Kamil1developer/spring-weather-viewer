@@ -5,10 +5,9 @@ import com.example.weatherviewer.entity.User;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface SessionRepository {
-    public Optional<User> findByLogin(String userName);
-
-    public List<User> findAll();
-    public void save(Session session);
+    public Optional<Session> findByUserId(Long userId);
+    public Session save(Session session);
 }

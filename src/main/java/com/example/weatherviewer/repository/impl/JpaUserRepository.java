@@ -4,7 +4,6 @@ import com.example.weatherviewer.entity.User;
 import com.example.weatherviewer.repository.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,9 +16,9 @@ public class JpaUserRepository implements UserRepository {
     @PersistenceContext
     private  EntityManager entityManager;
 
-    public Optional<User> findByLogin(String userName){
-        return entityManager.createQuery("select u from User u where u.login = :userName", User.class)
-                .setParameter("userName", userName)
+    public Optional<User> findByLogin(String login){
+        return entityManager.createQuery("select u from User u where u.login = :login", User.class)
+                .setParameter("login", login)
                 .getResultStream()
                 .findFirst();
     }
@@ -28,7 +27,8 @@ public class JpaUserRepository implements UserRepository {
         return entityManager.createQuery("select u from User u", User.class)
                 .getResultList();
     }
-    public void save(User user){
+    public User save(User user){
         entityManager.persist(user);
+        return user;
     }
 }

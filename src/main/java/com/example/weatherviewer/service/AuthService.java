@@ -1,7 +1,9 @@
 package com.example.weatherviewer.service;
 
 import com.example.weatherviewer.auth.AuthResult;
+import com.example.weatherviewer.entity.Session;
 import com.example.weatherviewer.exceptions.LoginAlreadyExistsException;
+import com.example.weatherviewer.exceptions.SessionNotFoundException;
 import com.example.weatherviewer.form.LoginForm;
 import com.example.weatherviewer.form.RegisterForm;
 import com.example.weatherviewer.repository.UserRepository;
@@ -17,6 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthService {
     private final UserRepository userRepository;
+    private final SessionService sessionService;
 
     @Transactional
     public AuthResult signIn(LoginForm loginForm){
@@ -27,9 +30,25 @@ public class AuthService {
         }
 
         User user = optionalUser.get();
+        sessionService.createSessionFor(user);
 
 
         return isPasswordValid(user, loginForm);
+    }
+
+    @Transactional
+    public String getSessionId(String login){
+        Optional<User> optionalUser = userRepository.findByLogin(login);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            Optional<Session> optionalSession = sessionService.getSessionId(user.getId());
+            if (optionalSession.isPresent()){
+                Session session = optionalSession.get();
+
+                return session.getId().toString();
+            }
+        }
+        throw new SessionNotFoundException();
     }
 
     @Transactional
@@ -40,7 +59,8 @@ public class AuthService {
 
         try {
             if (password.equals(repeatPassword)){
-                userRepository.save(new User(username,password));
+                User user = userRepository.save(new User(username,password));
+                sessionService.createSessionFor(user);
             }
             else{
                 return AuthResult.CONFIRM_PASSWORD_INVALID;
