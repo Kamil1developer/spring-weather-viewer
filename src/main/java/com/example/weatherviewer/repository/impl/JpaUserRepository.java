@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-
-
 public class JpaUserRepository implements UserRepository {
     @PersistenceContext
     private  EntityManager entityManager;

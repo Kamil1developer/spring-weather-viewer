@@ -19,16 +19,20 @@ public class JpaSessionRepository  implements SessionRepository {
 
     @Override
     public Optional<Session> findByUserId(Long userId) {
-        entityManager.createQuery("select s from sessions s where s.userId = :userId")
+        return entityManager.createQuery("select s from Session s where s.userId = :userId", Session.class)
                 .setParameter("userId", userId)
                 .getResultStream()
                 .findFirst();
-        return Optional.empty();
     }
 
     @Override
     public Session save(Session session) {
         entityManager.persist(session);
         return session;
+    }
+
+    @Override
+    public void deleteBySessionId(UUID id) {
+
     }
 }

@@ -2,8 +2,10 @@ package com.example.weatherviewer.service;
 
 import com.example.weatherviewer.entity.Session;
 import com.example.weatherviewer.entity.User;
+import com.example.weatherviewer.form.LoginForm;
 import com.example.weatherviewer.repository.SessionRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -12,8 +14,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class SessionService {
-    private SessionRepository sessionRepository;
+    private final SessionRepository sessionRepository;
     @Transactional
     public Session createSessionFor(User user){
         UUID uuid = UUID.randomUUID();
@@ -30,6 +33,11 @@ public class SessionService {
             return sessionRepository.findByUserId(userId);
         }
         return Optional.empty();
+    }
+
+    @Transactional
+    public void deleteCurrentSession(){
+
     }
 
 
