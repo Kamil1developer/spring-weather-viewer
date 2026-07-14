@@ -36,8 +36,9 @@ public class SessionService {
     }
 
     @Transactional
-    public void deleteCurrentSession(){
-
+    public void deleteCurrentSession(String session){
+        UUID id = UUID.fromString(session);
+        sessionRepository.deleteBySessionId(id);
     }
 
 

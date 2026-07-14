@@ -33,6 +33,8 @@ public class JpaSessionRepository  implements SessionRepository {
 
     @Override
     public void deleteBySessionId(UUID id) {
-
+        entityManager.createQuery("delete from Session s where s.id = :id ")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 }
