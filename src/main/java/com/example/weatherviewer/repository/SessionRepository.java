@@ -11,4 +11,5 @@ public interface SessionRepository {
     public Optional<Session> findByUserId(Long userId);
     public Session save(Session session);
     public void deleteBySessionId(UUID id);
+    public boolean existsById(UUID id);
 }

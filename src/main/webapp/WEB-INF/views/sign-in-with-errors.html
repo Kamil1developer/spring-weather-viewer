@@ -27,6 +27,11 @@
 
                 <div class="row justify-content-center">
                     <div class="col-12">
+                        <div th:if="${authenticationRequired}"
+                             th:text="Сначала необходимо войти в аккаунт"
+                             class="text-danger text-center mb-3">
+                        </div>
+
                         <div th:each="error : ${#fields.globalErrors()}"
                              th:text="${error}"
                              class="text-danger text-center mb-3">

@@ -37,4 +37,13 @@ public class JpaSessionRepository  implements SessionRepository {
                 .setParameter("id", id)
                 .executeUpdate();
     }
+
+    @Override
+    public boolean existsById(UUID sessionId) {
+        return entityManager.createQuery("select s from Session where s.id = sessionId")
+                .setParameter("sessionId",sessionId)
+                .getResultStream()
+                .findFirst()
+                .isPresent();
+    }
 }

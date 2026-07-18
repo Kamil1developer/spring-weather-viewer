@@ -5,6 +5,7 @@ import com.example.weatherviewer.form.LoginForm;
 import com.example.weatherviewer.form.RegisterForm;
 import com.example.weatherviewer.mapper.AuthViewMapper;
 import com.example.weatherviewer.service.AuthService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.Optional;
 import java.util.UUID;
@@ -31,10 +34,15 @@ public class SignInController {
     @PostMapping("/sign-in")
     public String signIn(Model model,
                          @Validated @ModelAttribute LoginForm loginForm,
-                         BindingResult bindingResult){
+                         BindingResult bindingResult,
+                         @RequestParam(name = "reason", required = false) String reason,
+                         HttpServletResponse response){
         String login = loginForm.getUsername();
-        String password = loginForm.getPassword();
 
+        if (!reason.isEmpty()){
+            model.addAttribute("authenticationRequired", true);
+            return "sign-in-with-errors";
+        }
         if (bindingResult.hasErrors()) {
             return "sign-in-with-errors";
         }
@@ -55,6 +63,8 @@ public class SignInController {
                 .maxAge(Duration.ofDays(1))
                 .sameSite("Lax")
                 .build();
+
+        response.addHeader("Set-Cookie", cookie.toString());
 
         return "redirect:/home";
     }

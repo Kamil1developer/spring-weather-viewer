@@ -41,6 +41,11 @@ public class SessionService {
         sessionRepository.deleteBySessionId(id);
     }
 
+    @Transactional
+    public boolean existsBySessionId(String sessionId){
+        return sessionRepository.existsById(UUID.fromString(sessionId));
+    }
+
 
 
 }

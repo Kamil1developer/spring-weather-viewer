@@ -16,9 +16,11 @@
         </a>
         <div class="d-flex align-items-center">
             <span class="navbar-text me-3">zhukovsd</span>
-            <a th:href="@{/sign-out}" class="btn btn-outline-danger">
-                Sign out
-            </a>
+            <form th:action="@{/sign-out}" method="post">
+                <button type="submit" class="btn btn-outline-danger">
+                    Sign out
+                </button>
+            </form>
         </div>
     </div>
 </nav>

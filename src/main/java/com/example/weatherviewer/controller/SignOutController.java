@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class SignOutController {
     private final SessionService sessionService;
-    @GetMapping("/sign-out")
+    @PostMapping("/sign-out")
     public String showSignInPage(@CookieValue(name = "SESSION_ID", required = false) String session,
                                  HttpServletResponse response
                                  ){
