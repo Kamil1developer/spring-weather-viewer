@@ -47,7 +47,7 @@ public class SessionAuthenticationFilter extends OncePerRequestFilter {
                 response.sendRedirect(request.getContextPath() + SIGN_IN_PATH + "?reason=authentication-required");
                 filterChain.doFilter(request, response);
             }
-            else if (sessionService.existsBySessionId(sessionId)) {
+            else if (!sessionService.existsBySessionId(sessionId)) {
                 response.sendRedirect(request.getContextPath() + SIGN_IN_PATH + "?reason=authentication-required");
                 filterChain.doFilter(request, response);
             }

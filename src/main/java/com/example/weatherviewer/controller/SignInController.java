@@ -5,6 +5,7 @@ import com.example.weatherviewer.form.LoginForm;
 import com.example.weatherviewer.form.RegisterForm;
 import com.example.weatherviewer.mapper.AuthViewMapper;
 import com.example.weatherviewer.service.AuthService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseCookie;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.Optional;
@@ -27,22 +29,29 @@ import java.util.UUID;
 public class SignInController {
     private final AuthService authService;
     @GetMapping("/sign-in")
-    public String showSignInPage(Model model){
+    public String showSignInPage(Model model,
+                                 @RequestParam(name = "reason", required = false) String reason,
+                                 HttpServletResponse response,
+                                 HttpServletRequest request) throws IOException {
+
+        if (reason != null){
+            model.addAttribute("loginForm", new LoginForm());
+            model.addAttribute("authenticationRequired", true);
+            return "sign-in";
+        }
+        model.addAttribute("authenticationRequired", false);
         model.addAttribute("loginForm", new LoginForm());
+
         return "sign-in";
+
     }
     @PostMapping("/sign-in")
     public String signIn(Model model,
                          @Validated @ModelAttribute LoginForm loginForm,
                          BindingResult bindingResult,
-                         @RequestParam(name = "reason", required = false) String reason,
                          HttpServletResponse response){
         String login = loginForm.getUsername();
 
-        if (!reason.isEmpty()){
-            model.addAttribute("authenticationRequired", true);
-            return "sign-in-with-errors";
-        }
         if (bindingResult.hasErrors()) {
             return "sign-in-with-errors";
         }

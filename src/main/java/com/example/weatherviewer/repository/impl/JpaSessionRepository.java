@@ -40,7 +40,7 @@ public class JpaSessionRepository  implements SessionRepository {
 
     @Override
     public boolean existsById(UUID sessionId) {
-        return entityManager.createQuery("select s from Session where s.id = sessionId")
+        return entityManager.createQuery("select s from Session s where s.id = :sessionId")
                 .setParameter("sessionId",sessionId)
                 .getResultStream()
                 .findFirst()
