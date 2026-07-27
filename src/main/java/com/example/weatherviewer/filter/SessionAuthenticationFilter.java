@@ -18,7 +18,7 @@ import java.util.*;
 @Component
 @RequiredArgsConstructor
 public class SessionAuthenticationFilter extends OncePerRequestFilter {
-    private static final List<String> PUBLIC_URLS = List.of("/home");
+    private static final List<String> PUBLIC_URLS = List.of("/home", "/search-results");
     private static final String SIGN_IN_PATH = "/sign-in";
     private final SessionService sessionService;
     @Override

@@ -46,8 +46,7 @@ public class SignInController {
 
     }
     @PostMapping("/sign-in")
-    public String signIn(Model model,
-                         @Validated @ModelAttribute LoginForm loginForm,
+    public String signIn(@Validated @ModelAttribute LoginForm loginForm,
                          BindingResult bindingResult,
                          HttpServletResponse response){
         String login = loginForm.getUsername();
@@ -55,7 +54,6 @@ public class SignInController {
         if (bindingResult.hasErrors()) {
             return "sign-in-with-errors";
         }
-
         AuthResult result = authService.signIn(loginForm);
         AuthViewMapper mapper = new AuthViewMapper(result);
         mapper.applyErrors(result, bindingResult);
