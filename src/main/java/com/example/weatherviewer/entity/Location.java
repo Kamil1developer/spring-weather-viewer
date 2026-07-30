@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Table(name = "locations")
@@ -11,16 +12,19 @@ import java.math.BigDecimal;
 @Getter
 @RequiredArgsConstructor
 public class Location {
+    @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @Column(name = "name")
+    @NonNull
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
-    private Long userId;
+    @JoinColumn(name = "user_Id")
+    @NonNull
+    private User user;
 
     @Column(name = "latitude", nullable = false)
     @NonNull
@@ -31,9 +35,10 @@ public class Location {
     private BigDecimal longitude;
 
     @Column(name = "state")
+    @NonNull
     private String state;
 
     @Column(name = "country")
+    @NonNull
     private String country;
-
 }

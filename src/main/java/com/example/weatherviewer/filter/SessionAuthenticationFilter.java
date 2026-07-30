@@ -22,7 +22,9 @@ public class SessionAuthenticationFilter extends OncePerRequestFilter {
     private static final String SIGN_IN_PATH = "/sign-in";
     private final SessionService sessionService;
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
         String uri = request.getRequestURI();
         String contextPath = request.getContextPath();
         String path = uri.substring(contextPath.length());

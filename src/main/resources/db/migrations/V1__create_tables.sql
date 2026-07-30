@@ -10,6 +10,8 @@ CREATE TABLE locations (
     user_id BIGINT NOT NULL,
     latitude DECIMAL(9,6) NOT NULL,
     longitude DECIMAL(9,6) NOT NULL,
+    country VARCHAR(255),
+    state VARCHAR(255),
 
     CONSTRAINT fk_locations_user
         FOREIGN KEY (user_id)

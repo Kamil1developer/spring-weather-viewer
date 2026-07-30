@@ -46,4 +46,12 @@ public class JpaSessionRepository  implements SessionRepository {
                 .findFirst()
                 .isPresent();
     }
+
+    @Override
+    public Optional<User> findBySessionId(UUID sessionId) {
+        return entityManager.createQuery("select s.user from Session s where s.id = :sessionId",User.class)
+                .setParameter("sessionId",sessionId)
+                .getResultStream()
+                .findFirst();
+    }
 }

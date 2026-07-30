@@ -1,5 +1,6 @@
 package com.example.weatherviewer.client;
 
+import com.example.weatherviewer.client.LocationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
@@ -20,10 +21,10 @@ public class OpenWeatherGeocodingClient {
         this.apiKey = environment.getRequiredProperty("OPENWEATHER_API_KEY");
     }
 
-    public List<LocationResponse> searchLocations(String name){
+    public List<LocationResponse> searchLocations(String name) {
         return restClient.get()
                 .uri("?q={name}&appid={apiKey}", name, apiKey)
                 .retrieve()
-                .body(new ParameterizedTypeReference<List<LocationResponse>>(){});
+                .body(new ParameterizedTypeReference<List<LocationResponse>>() {});
     }
 }

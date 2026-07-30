@@ -2,7 +2,6 @@ package com.example.weatherviewer.service;
 
 import com.example.weatherviewer.entity.Session;
 import com.example.weatherviewer.entity.User;
-import com.example.weatherviewer.form.LoginForm;
 import com.example.weatherviewer.repository.SessionRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +17,11 @@ import java.util.UUID;
 public class SessionService {
     private final SessionRepository sessionRepository;
     @Transactional
-    public Session createSessionFor(User user){
+    public void createSessionFor(User user){
         UUID uuid = UUID.randomUUID();
-        Long id = user.getId();
         Instant expiresAt = Instant.now().plus(Duration.ofHours(24));
 
-        return sessionRepository.save(new Session(uuid, id, expiresAt));
+        sessionRepository.save(new Session(uuid, user, expiresAt));
     }
 
     @Transactional
@@ -31,6 +29,15 @@ public class SessionService {
         Optional<Session> optionalSession = sessionRepository.findByUserId(userId);
         if (optionalSession.isPresent()){
             return sessionRepository.findByUserId(userId);
+        }
+        return Optional.empty();
+    }
+
+    @Transactional
+    public Optional<User> getUserId(UUID sessionId){
+        Optional<User> optionalSession = sessionRepository.findBySessionId(sessionId);
+        if (optionalSession.isPresent()){
+            return sessionRepository.findBySessionId(sessionId);
         }
         return Optional.empty();
     }

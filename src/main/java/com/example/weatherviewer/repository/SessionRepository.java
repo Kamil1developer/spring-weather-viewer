@@ -12,4 +12,5 @@ public interface SessionRepository {
     public Session save(Session session);
     public void deleteBySessionId(UUID id);
     public boolean existsById(UUID id);
+    public Optional<User>  findBySessionId(UUID id);
 }

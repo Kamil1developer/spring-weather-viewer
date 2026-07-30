@@ -1,9 +1,6 @@
 package com.example.weatherviewer.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
@@ -21,9 +18,10 @@ public class Session {
     @NonNull
     private UUID id;
 
-    @Column(name = "user_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_Id", nullable = false)
     @NonNull
-    private Long userId;
+    private User userId;
 
     @Column(name = "expires_at", nullable = false)
     @NonNull
