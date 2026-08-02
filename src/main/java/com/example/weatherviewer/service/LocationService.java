@@ -4,12 +4,14 @@ import com.example.weatherviewer.client.dto.LocationResponse;
 import com.example.weatherviewer.client.OpenWeatherGeocodingClient;
 import com.example.weatherviewer.entity.Location;
 import com.example.weatherviewer.entity.User;
+import com.example.weatherviewer.form.DeleteLocationForm;
 import com.example.weatherviewer.form.LocationForm;
 import com.example.weatherviewer.repository.LocationRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -42,6 +44,24 @@ public class LocationService {
 
             locationRepository.save(location);
         }
+    }
+
+    @Transactional
+    public List<Location> getLocationsBySessionId(String sessionId){
+        Optional<User> optionalUser = sessionService.getUserId(UUID.fromString(sessionId));
+        User user;
+        if (optionalUser.isPresent()){
+            user = optionalUser.get();
+
+            return locationRepository.findAllByUserId(user);
+        }
+
+        return List.of();
+    }
+
+    @Transactional
+    public void deleteLocation(String name, String lat, String lon){
+        locationRepository.deleteByNameAndCoordinates(name, new BigDecimal(lat), new BigDecimal(lon));
     }
 
 }

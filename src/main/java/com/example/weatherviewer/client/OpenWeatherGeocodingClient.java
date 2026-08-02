@@ -33,6 +33,5 @@ public class OpenWeatherGeocodingClient {
                 .uri("/data/2.5/weather?lat=55.79&lon=49.12&appid={apiKey}=&units=metric")
                 .retrieve()
                 .body(WeatherResponse.class);
-
     }
 }
