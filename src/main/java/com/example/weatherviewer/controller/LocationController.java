@@ -1,9 +1,8 @@
 package com.example.weatherviewer.controller;
 
-import com.example.weatherviewer.client.LocationResponse;
+import com.example.weatherviewer.client.dto.LocationResponse;
 import com.example.weatherviewer.form.LocationForm;
 import com.example.weatherviewer.service.LocationService;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,6 +35,6 @@ public class LocationController {
 
 
         locationSearchService.addLocation(locationForm, UUID.fromString(sessionId));
-        return "index";
+        return "redirect:/home";
     }
 }

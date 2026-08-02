@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface SessionRepository {
-    public Optional<Session> findByUserId(Long userId);
+    public Optional<Session> findByUserId(User user);
     public Session save(Session session);
     public void deleteBySessionId(UUID id);
     public boolean existsById(UUID id);

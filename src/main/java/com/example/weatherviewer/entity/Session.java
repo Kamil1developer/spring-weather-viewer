@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -21,7 +20,7 @@ public class Session {
     @ManyToOne
     @JoinColumn(name = "user_Id", nullable = false)
     @NonNull
-    private User userId;
+    private User user;
 
     @Column(name = "expires_at", nullable = false)
     @NonNull

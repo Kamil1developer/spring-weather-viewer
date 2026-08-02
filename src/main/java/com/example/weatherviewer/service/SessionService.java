@@ -25,10 +25,10 @@ public class SessionService {
     }
 
     @Transactional
-    public Optional<Session> getSessionId(Long userId){
-        Optional<Session> optionalSession = sessionRepository.findByUserId(userId);
+    public Optional<Session> getSessionId(User user){
+        Optional<Session> optionalSession = sessionRepository.findByUserId(user);
         if (optionalSession.isPresent()){
-            return sessionRepository.findByUserId(userId);
+            return sessionRepository.findByUserId(user);
         }
         return Optional.empty();
     }

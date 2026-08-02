@@ -1,4 +1,4 @@
-package com.example.weatherviewer.client;
+package com.example.weatherviewer.client.dto;
 
 
 import java.math.BigDecimal;
@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 
 public record LocationResponse(
         String name,
-        BigDecimal latitude,
-        BigDecimal longitude,
+        BigDecimal lat,
+        BigDecimal lon,
         String country,
         String state
 ) {

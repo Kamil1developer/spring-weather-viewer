@@ -32,7 +32,7 @@ public class SignUpController {
         return "sign-up";
     }
     @PostMapping("/sign-up")
-    public String signUp(@CookieValue("SESSION_ID") String session, Model model,
+    public String signUp(Model model,
                          @Validated @ModelAttribute RegisterForm registerForm,
                          BindingResult bindingResult,
                          HttpServletResponse response){

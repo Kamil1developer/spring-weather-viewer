@@ -1,11 +1,12 @@
 package com.example.weatherviewer.service;
 
-import com.example.weatherviewer.client.LocationResponse;
+import com.example.weatherviewer.client.dto.LocationResponse;
 import com.example.weatherviewer.client.OpenWeatherGeocodingClient;
 import com.example.weatherviewer.entity.Location;
 import com.example.weatherviewer.entity.User;
 import com.example.weatherviewer.form.LocationForm;
 import com.example.weatherviewer.repository.LocationRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,8 @@ public class LocationService {
     public List<LocationResponse> search(String name){
         return openWeatherGeocodingClient.searchLocations(name);
     }
+
+    @Transactional
     public void addLocation(LocationForm locationForm, UUID sessionId){
         Optional<User> optionalUser = sessionService.getUserId(sessionId);
         User user;
@@ -31,8 +34,8 @@ public class LocationService {
 
             Location location = new Location(locationForm.getName(),
                     user,
-                    locationForm.getLatitude(),
-                    locationForm.getLongitude(),
+                    locationForm.getLat(),
+                    locationForm.getLon(),
                     locationForm.getState(),
                     locationForm.getCountry()
             );

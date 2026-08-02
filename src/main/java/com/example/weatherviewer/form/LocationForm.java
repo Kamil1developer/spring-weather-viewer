@@ -1,17 +1,14 @@
 package com.example.weatherviewer.form;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
-@Getter
-@RequiredArgsConstructor
+@Data
 public class LocationForm {
-    private final String name;
-    private final BigDecimal latitude;
-    private final BigDecimal longitude;
-    private final String country;
-    private final String state;
+    private  String name;
+    private  BigDecimal lat;
+    private  BigDecimal lon;
+    private  String country;
+    private  String state;
 }

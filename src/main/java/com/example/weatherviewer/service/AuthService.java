@@ -41,7 +41,7 @@ public class AuthService {
         Optional<User> optionalUser = userRepository.findByLogin(login);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            Optional<Session> optionalSession = sessionService.getSessionId(user.getId());
+            Optional<Session> optionalSession = sessionService.getSessionId(user);
             if (optionalSession.isPresent()){
                 Session session = optionalSession.get();
 

@@ -18,9 +18,9 @@ public class JpaSessionRepository  implements SessionRepository {
 
 
     @Override
-    public Optional<Session> findByUserId(Long userId) {
-        return entityManager.createQuery("select s from Session s where s.userId = :userId", Session.class)
-                .setParameter("userId", userId)
+    public Optional<Session> findByUserId(User user) {
+        return entityManager.createQuery("select s from Session s where s.user = :user", Session.class)
+                .setParameter("user", user)
                 .getResultStream()
                 .findFirst();
     }

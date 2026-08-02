@@ -58,17 +58,39 @@
                     <div class="card-body d-flex flex-column">
                         <form th:action="@{/search-results/add}" method="post">
 
+                            <h5 th:text="${location.name}">Kazan</h5>
+
+                            <p>
+                                Latitude:
+                                <span th:text="${location.lat}"></span>
+                            </p>
+
+                            <p>
+                                Longitude:
+                                <span th:text="${location.lon}"></span>
+                            </p>
+
+                            <p>
+                                Country:
+                                <span th:text="${location.country}"></span>
+                            </p>
+
+                            <p>
+                                State:
+                                <span th:text="${location.state}"></span>
+                            </p>
+
                             <input type="hidden"
                                    name="name"
                                    th:value="${location.name}">
 
                             <input type="hidden"
-                                   name="latitude"
-                                   th:value="${location.latitude}">
+                                   name="lat"
+                                   th:value="${location.lat}">
 
                             <input type="hidden"
-                                   name="longitude"
-                                   th:value="${location.longitude}">
+                                   name="lon"
+                                   th:value="${location.lon}">
 
                             <input type="hidden"
                                    name="country"
