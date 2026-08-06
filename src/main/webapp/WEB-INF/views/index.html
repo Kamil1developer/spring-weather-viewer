@@ -52,12 +52,15 @@
 
         <div class="row">
             <div class="col-12 col-lg-3 col-md-6 mb-4"
-                 th:each="location : ${locations}">
+                 th:each="location : ${weatherResponses}">
 
                 <div class="card h-100">
                     <form th:action="@{/home/delete}" method="post" class="d-flex my-4">
                         <button class="btn-close" aria-label="Delete"></button>
                         <div class="card-body d-flex flex-column">
+                            <img th:src="|https://openweathermap.org/img/wn/${weatherResponse.weather.icon}@2x.png|"
+                                 class="weather-icon"
+                            >
 
                             <h5 class="card-title"
                                 th:text="${location.name}">
@@ -66,12 +69,12 @@
 
                             <p class="card-text mb-1">
                                 Feels like:
-                                <span th:text="${location.feelsLike}">0</span>
+                                <span th:text="${location.weatherMeasurements.feelsLike}">0</span>
                             </p>
 
                             <p class="card-text mb-1">
                                 Humidity:
-                                <span th:text="${location.humidity}">0</span>
+                                <span th:text="|${location.weatherMeasurements.humidity}%|">0</span>
                             </p>
 
                             <p class="card-text mb-1">
@@ -84,24 +87,24 @@
                                 <span th:text="${location.longitude}">0</span>
                             </p>
 
-                            <input type="hidden"
-                                   name="name"
-                                   th:value="${location.name}">
+<!--                            <input type="hidden"-->
+<!--                                   name="name"-->
+<!--                                   th:value="${location.name}">-->
 
-                            <input type="hidden"
-                                   name="lat"
-                                   th:value="${location.latitude}">
+<!--                            <input type="hidden"-->
+<!--                                   name="lat"-->
+<!--                                   th:value="${location.latitude}">-->
 
-                            <input type="hidden"
-                                   name="lon"
-                                   th:value="${location.longitude}">
+<!--                            <input type="hidden"-->
+<!--                                   name="lon"-->
+<!--                                   th:value="${location.longitude}">-->
                         </div>
                     </form>
                 </div>
             </div>
         </div>
 
-        <p th:if="${#lists.isEmpty(locations)}">
+        <p th:if="${#lists.isEmpty(weatherResponses)}">
             No locations found.
         </p>
     </div>

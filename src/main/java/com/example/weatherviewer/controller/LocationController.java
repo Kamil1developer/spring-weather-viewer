@@ -20,8 +20,9 @@ public class LocationController {
     @GetMapping("/search-results")
     public String showSearchResults(Model model, HttpServletRequest request){
         String name = request.getParameter("location");
-        List<LocationResponse> locations = locationService.search(name);
-        model.addAttribute("locations", locations);
+        List<LocationResponse> weatherResponses = locationService.search(name);
+        model.addAttribute("locations", weatherResponses);
+        model.addAttribute("name", name);
 
         return "search-results";
     }

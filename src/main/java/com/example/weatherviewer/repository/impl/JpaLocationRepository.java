@@ -34,7 +34,7 @@ public class JpaLocationRepository implements LocationRepository {
 
     @Override
     public List<Location> findAllByUserId(User user) {
-        return entityManager.createQuery("select location from Location location where location.user := user", Location.class)
+        return entityManager.createQuery("select location from Location location where location.user =: user", Location.class)
                 .setParameter("user", user)
                 .getResultList();
     }

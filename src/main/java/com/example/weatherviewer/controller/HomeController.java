@@ -1,5 +1,6 @@
 package com.example.weatherviewer.controller;
 
+import com.example.weatherviewer.dto.WeatherResponse;
 import com.example.weatherviewer.entity.Location;
 import com.example.weatherviewer.service.AuthService;
 import com.example.weatherviewer.service.LocationService;
@@ -20,9 +21,9 @@ public class HomeController {
     public String showHomePage(@CookieValue(name = "SESSION_ID", required = false)
                                     String sessionId,
                                Model model){
-        List<Location> locations = locationService.getLocationsBySessionId(sessionId);
+        List<WeatherResponse> weatherResponses = locationService.getLocationsBySessionId(sessionId);
 
-        model.addAttribute("locations", locations);
+        model.addAttribute("locations", weatherResponses);
 
         return "index";
     }
