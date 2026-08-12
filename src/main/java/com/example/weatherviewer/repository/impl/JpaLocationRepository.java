@@ -23,12 +23,13 @@ public class JpaLocationRepository implements LocationRepository {
     @Override
     public void deleteByNameAndCoordinates(String name, BigDecimal lat, BigDecimal lan) {
         entityManager.createQuery("""
-                select location from Location location where location.name =: name and
-                location.lat =: lat and location.lon =: lon
+                delete from Location location where location.name =: name and
+                abs(location.latitude - :lat) < :epsilon and abs(location.longitude - :lon) < :epsilon
                 """)
                 .setParameter("name", name)
                 .setParameter("lat", lat)
                 .setParameter("lon", lan)
+                .setParameter("epsilon", new BigDecimal("0.005"))
                 .executeUpdate();
     }
 

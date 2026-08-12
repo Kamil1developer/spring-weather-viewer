@@ -18,7 +18,7 @@ import java.util.*;
 @Component
 @RequiredArgsConstructor
 public class SessionAuthenticationFilter extends OncePerRequestFilter {
-    private static final List<String> PUBLIC_URLS = List.of("/home", "/search-results");
+    private static final List<String> PUBLIC_URLS = List.of("/home", "/search-results", "/add", "delete");
     private static final String SIGN_IN_PATH = "/sign-in";
     private final SessionService sessionService;
     @Override
@@ -42,7 +42,7 @@ public class SessionAuthenticationFilter extends OncePerRequestFilter {
             }
         }
 
-        if (PUBLIC_URLS.contains(path) &&
+        if (PUBLIC_URLS.stream().anyMatch(url ->url.contains(path)) &&
                 !path.equals("/sign-in") &&
                 !path.equals("/sign-up")){
 
@@ -50,7 +50,7 @@ public class SessionAuthenticationFilter extends OncePerRequestFilter {
                 response.sendRedirect(request.getContextPath() + SIGN_IN_PATH + "?reason=authentication-required");
                 filterChain.doFilter(request, response);
             }
-            else if (!sessionService.existsBySessionId(sessionId)) {
+            else if (!sessionService.isSessionValid(sessionId)) {
                 response.sendRedirect(request.getContextPath() + SIGN_IN_PATH + "?reason=authentication-required");
                 filterChain.doFilter(request, response);
             }

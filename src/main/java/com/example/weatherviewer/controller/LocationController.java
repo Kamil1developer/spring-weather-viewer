@@ -37,8 +37,9 @@ public class LocationController {
         return "redirect:/home";
     }
 
-    @DeleteMapping("home/delete")
+    @PostMapping("home/delete")
     public String deleteLocation(@ModelAttribute DeleteLocationForm deleteLocationForm){
+
         locationService.deleteLocation(
                 deleteLocationForm.name(),
                 deleteLocationForm.lat(),

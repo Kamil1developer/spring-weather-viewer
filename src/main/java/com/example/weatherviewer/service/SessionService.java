@@ -19,7 +19,7 @@ public class SessionService {
     @Transactional
     public void createSessionFor(User user){
         UUID uuid = UUID.randomUUID();
-        Instant expiresAt = Instant.now().plus(Duration.ofHours(24));
+        Instant expiresAt = Instant.now().plus(Duration.ofHours(1));
 
         sessionRepository.save(new Session(uuid, user, expiresAt));
     }
@@ -49,8 +49,14 @@ public class SessionService {
     }
 
     @Transactional
-    public boolean existsBySessionId(String sessionId){
-        return sessionRepository.existsById(UUID.fromString(sessionId));
+    public boolean isSessionValid(String sessionId){
+        Instant now = Instant.now();
+        return sessionRepository.existsByIdAndExpiresAtBefore(UUID.fromString(sessionId), now);
+    }
+    @Transactional
+    public void deleteExpiredSessions(){
+        Instant now = Instant.now();
+        sessionRepository.deleteByExpiresAtBefore(now);
     }
 
 

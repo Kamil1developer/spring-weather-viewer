@@ -19,7 +19,7 @@ CREATE TABLE locations (
         ON DELETE CASCADE,
 
     CONSTRAINT uq_locations_user_name
-        UNIQUE (user_id, name)
+        UNIQUE (user_id, latitude, longitude)
 );
 
 CREATE TABLE sessions (

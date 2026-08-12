@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -39,9 +40,13 @@ public class JpaSessionRepository  implements SessionRepository {
     }
 
     @Override
-    public boolean existsById(UUID sessionId) {
-        return entityManager.createQuery("select s from Session s where s.id = :sessionId")
+    public boolean existsByIdAndExpiresAtBefore(UUID sessionId, Instant now) {
+        return entityManager.createQuery("""
+                select s from Session s where s.id = :sessionId and
+                :now < s.expiresAt
+                """)
                 .setParameter("sessionId",sessionId)
+                .setParameter("now", now)
                 .getResultStream()
                 .findFirst()
                 .isPresent();
@@ -54,4 +59,12 @@ public class JpaSessionRepository  implements SessionRepository {
                 .getResultStream()
                 .findFirst();
     }
+
+    @Override
+    public void deleteByExpiresAtBefore(Instant now) {
+        entityManager.createQuery("delete from Session s where :now > s.expiresAt")
+                .setParameter("now",now)
+                .executeUpdate();
+    }
+
 }

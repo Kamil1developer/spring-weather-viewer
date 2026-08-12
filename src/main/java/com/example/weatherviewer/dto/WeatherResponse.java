@@ -6,5 +6,5 @@ import com.example.weatherviewer.client.WeatherMeasurements;
 
 import java.util.List;
 
-public record WeatherResponse(Coord coord, List<Weather> weathers, WeatherMeasurements main) {
+public record WeatherResponse(String name,Coord coord, List<Weather> weathers, WeatherMeasurements main) {
 }

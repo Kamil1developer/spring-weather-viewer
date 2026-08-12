@@ -64,8 +64,9 @@ public class LocationService {
             List<WeatherResponse> weatherResponses = new LinkedList<>();
             for (Location location: locations ){
                 LocationRequest locationRequest = locationMapper.toOpenWeatherRequest(location);
+                String name = location.getName();
                 OpenWeatherResponse openWeatherResponse = openWeatherGeocodingClient.getWeatherByCoordinates(locationRequest);
-                WeatherResponse weatherResponse = weatherMapper.toResponse(openWeatherResponse);
+                WeatherResponse weatherResponse = weatherMapper.toResponse(name, openWeatherResponse);
 
                 weatherResponses.add(weatherResponse);
             }

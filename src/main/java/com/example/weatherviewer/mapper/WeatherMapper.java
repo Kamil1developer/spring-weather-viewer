@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class WeatherMapper {
-    public WeatherResponse toResponse(OpenWeatherResponse openWeatherResponse){
-        return new WeatherResponse(
+    public WeatherResponse toResponse(String name, OpenWeatherResponse openWeatherResponse){
+        return new WeatherResponse(name,
                 openWeatherResponse.coord(),
                 openWeatherResponse.weathers(),
                 openWeatherResponse.main()
