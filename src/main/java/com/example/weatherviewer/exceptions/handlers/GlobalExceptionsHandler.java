@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
 import javax.security.auth.login.LoginException;
 import java.util.List;
@@ -27,6 +28,12 @@ public class GlobalExceptionsHandler {
         List<LocationResponse> weatherResponses = locationService.search(name);
         model.addAttribute("locations", weatherResponses);
 
+        return "search-results";
+    }
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    public String handleMethodValidation(Model model){
+
+        model.addAttribute("validationError", true);
         return "search-results";
     }
 

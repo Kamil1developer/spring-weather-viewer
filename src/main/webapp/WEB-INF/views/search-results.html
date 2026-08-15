@@ -27,27 +27,38 @@
 
 <section id="page-content">
         <div class="container mt-4">
-            <form th:action="@{/search-results}" method="get" class="d-flex my-4">
-                <div class="input-group location-search-input-group me-3">
-                    <input class="form-control"
-                           type="text"
-                           name="location"
-                           placeholder="Введите локацию ">
+            <form th:action="@{/search-results}" method="get" class="my-4">
 
-                    <button class="btn btn-outline-secondary btn-sm clear-input-button"
-                            type="button"
-                            onclick="this.previousElementSibling.value=''">
-                        &times;
+                <div class="d-flex">
+                    <div class="input-group location-search-input-group me-3">
+                        <input class="form-control"
+                               type="text"
+                               name="location"
+                               placeholder="Введите локацию">
+
+                        <button class="btn btn-outline-secondary btn-sm clear-input-button"
+                                type="button"
+                                onclick="this.previousElementSibling.value=''">
+                            &times;
+                        </button>
+                    </div>
+
+                    <button class="btn btn-outline-success" type="submit">
+                        Search
                     </button>
                 </div>
 
-                <button class="btn btn-outline-success" type="submit">
-                    Search
-                </button>
+                <div class="text-danger mt-1"
+                     th:if="${validationError}">
+                    Используйте только латиницу
+                </div>
+
             </form>
         </div>
 
-    <div class="container">
+    <div class="container"
+         th:if="!${validationError}">
+
         <h2>Locations:</h2>
 
         <div class="row">

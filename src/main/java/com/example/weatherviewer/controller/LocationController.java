@@ -5,6 +5,7 @@ import com.example.weatherviewer.form.DeleteLocationForm;
 import com.example.weatherviewer.form.LocationForm;
 import com.example.weatherviewer.service.LocationService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +19,16 @@ import java.util.UUID;
 public class LocationController {
     private final LocationService locationService;
     @GetMapping("/search-results")
-    public String showSearchResults(Model model, HttpServletRequest request){
-        String name = request.getParameter("location");
-        List<LocationResponse> weatherResponses = locationService.search(name);
+    public String showSearchResults(Model model,
+                                    @Pattern(
+                                            regexp = "[A-Za-z -]+$",
+                                            message = "Используйте латиницу"
+                                    )
+                                    @RequestParam("location") String location){
+
+        List<LocationResponse> weatherResponses = locationService.search(location);
         model.addAttribute("locations", weatherResponses);
-        model.addAttribute("name", name);
+        model.addAttribute("name", location);
 
         return "search-results";
     }
