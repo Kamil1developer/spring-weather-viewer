@@ -7,12 +7,14 @@ import com.example.weatherviewer.client.dto.OpenWeatherResponse;
 import com.example.weatherviewer.dto.WeatherResponse;
 import com.example.weatherviewer.entity.Location;
 import com.example.weatherviewer.entity.User;
+import com.example.weatherviewer.exceptions.LocationAlreadyExistsException;
 import com.example.weatherviewer.form.LocationForm;
 import com.example.weatherviewer.mapper.LocationMapper;
 import com.example.weatherviewer.mapper.WeatherMapper;
 import com.example.weatherviewer.repository.LocationRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -48,8 +50,13 @@ public class LocationService {
                     locationForm.getState(),
                     locationForm.getCountry()
             );
+            try {
 
-            locationRepository.save(location);
+                locationRepository.save(location);
+            }
+            catch (ConstraintViolationException e){
+                throw new LocationAlreadyExistsException();
+            }
         }
     }
 

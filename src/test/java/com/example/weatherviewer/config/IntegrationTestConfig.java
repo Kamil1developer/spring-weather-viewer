@@ -1,9 +1,10 @@
 package com.example.weatherviewer.config;
 
+import com.example.weatherviewer.repository.impl.JpaSessionRepository;
+import com.example.weatherviewer.repository.impl.JpaUserRepository;
+import com.example.weatherviewer.service.SessionService;
 import jakarta.persistence.EntityManagerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.*;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -16,6 +17,12 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@Import({
+        SessionService.class,
+        JpaSessionRepository.class,
+        JpaUserRepository.class
+})
+
 public class IntegrationTestConfig {
 
     @Bean

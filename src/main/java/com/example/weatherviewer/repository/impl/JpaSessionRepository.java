@@ -67,4 +67,11 @@ public class JpaSessionRepository  implements SessionRepository {
                 .executeUpdate();
     }
 
+    @Override
+    public List<Session> findAllSessions(){
+        return entityManager.createQuery("select s from Session s", Session.class)
+                .getResultList();
+    }
+
+
 }

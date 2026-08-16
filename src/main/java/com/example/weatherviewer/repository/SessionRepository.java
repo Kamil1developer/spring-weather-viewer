@@ -16,4 +16,5 @@ public interface SessionRepository {
     public boolean existsByIdAndExpiresAtBefore(UUID id, Instant now);
     public Optional<User>  findBySessionId(UUID id);
     public void deleteByExpiresAtBefore(Instant now);
+    public List<Session> findAllSessions();
 }

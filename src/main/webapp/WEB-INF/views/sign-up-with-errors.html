@@ -49,6 +49,11 @@
                              th:errors="*{username}">
                         </div>
                     </div>
+
+                    <div th:if="${usernameAlreadyExists}"
+                         class="text-danger mt-1">
+                        Такой пользователь уже существует
+                    </div>
                 </div>
 
                 <div class="mb-3">

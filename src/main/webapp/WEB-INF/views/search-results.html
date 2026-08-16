@@ -11,7 +11,11 @@
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="images/weather-app.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            <img th:src="@{/static/images/weather-app.png}"
+                 alt=""
+                 width="30"
+                 height="24"
+                 class="d-inline-block align-text-top">
             Weather Tracker
         </a>
         <div class="d-flex align-items-center">
@@ -51,6 +55,11 @@
                 <div class="text-danger mt-1"
                      th:if="${validationError}">
                     Используйте только латиницу
+                </div>
+
+                <div class="text-danger mt-1"
+                     th:if="${locationAlreadyExists}">
+                    Такая локация была уже добавлена
                 </div>
 
             </form>

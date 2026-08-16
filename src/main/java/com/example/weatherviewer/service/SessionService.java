@@ -17,11 +17,11 @@ import java.util.UUID;
 public class SessionService {
     private final SessionRepository sessionRepository;
     @Transactional
-    public void createSessionFor(User user){
+    public Session createSessionFor(User user){
         UUID uuid = UUID.randomUUID();
         Instant expiresAt = Instant.now().plus(Duration.ofHours(1));
 
-        sessionRepository.save(new Session(uuid, user, expiresAt));
+        return sessionRepository.save(new Session(uuid, user, expiresAt));
     }
 
     @Transactional
@@ -55,7 +55,7 @@ public class SessionService {
     }
     @Transactional
     public void deleteExpiredSessions(){
-        Instant now = Instant.now();
+        Instant now = Instant.now().plus(Duration.ofHours(1));
         sessionRepository.deleteByExpiresAtBefore(now);
     }
 
