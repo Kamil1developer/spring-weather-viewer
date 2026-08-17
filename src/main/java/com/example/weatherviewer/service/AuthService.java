@@ -59,8 +59,7 @@ public class AuthService {
 
         try {
             if (password.equals(repeatPassword)){
-                User user = userRepository.save(new User(username,password));
-                sessionService.createSessionFor(user);
+                createUser(username, password);
             }
             else{
                 return AuthResult.CONFIRM_PASSWORD_INVALID;
@@ -72,6 +71,15 @@ public class AuthService {
             throw new LoginAlreadyExistsException();
         }
 
+    }
+    public void createUser(String username, String password){
+        try {
+            User user = userRepository.save(new User(username, password));
+            sessionService.createSessionFor(user);
+        }
+        catch (ConstraintViolationException ex){
+            throw new LoginAlreadyExistsException();
+        }
     }
 
     public AuthResult isPasswordValid(User user, LoginForm loginForm){

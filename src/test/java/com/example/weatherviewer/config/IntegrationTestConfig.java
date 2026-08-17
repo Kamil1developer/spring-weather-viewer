@@ -2,6 +2,7 @@ package com.example.weatherviewer.config;
 
 import com.example.weatherviewer.repository.impl.JpaSessionRepository;
 import com.example.weatherviewer.repository.impl.JpaUserRepository;
+import com.example.weatherviewer.service.AuthService;
 import com.example.weatherviewer.service.SessionService;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.context.annotation.*;
@@ -20,8 +21,10 @@ import java.util.Properties;
 @Import({
         SessionService.class,
         JpaSessionRepository.class,
-        JpaUserRepository.class
+        JpaUserRepository.class,
+        AuthService.class
 })
+@ComponentScan(basePackages = "com.example.weatherviewer.client")
 
 public class IntegrationTestConfig {
 

@@ -4,9 +4,11 @@ import com.example.weatherviewer.config.IntegrationTestConfig;
 import com.example.weatherviewer.config.IntegrationTestConfigFlywayConfig;
 import com.example.weatherviewer.entity.Session;
 import com.example.weatherviewer.entity.User;
+import com.example.weatherviewer.exceptions.LoginAlreadyExistsException;
 import com.example.weatherviewer.repository.SessionRepository;
 import com.example.weatherviewer.repository.UserRepository;
 import com.example.weatherviewer.scheduler.SessionCleanupScheduler;
+import com.example.weatherviewer.service.AuthService;
 import com.example.weatherviewer.service.SessionService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -82,9 +84,7 @@ public class SessionIntegrationTest {
         assertTrue(sessionsAfterDelete.isEmpty());
     }
 
-    @Test
-    @Transactional
-    void shouldRegistrationTheSampleLogin
+
 
 
 }
