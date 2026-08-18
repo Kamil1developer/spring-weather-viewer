@@ -14,12 +14,11 @@ import java.util.List;
 @Component
 
 public class OpenWeatherGeocodingClient {
-    private final RestClient restClient = RestClient.builder()
-            .baseUrl("https://api.openweathermap.org/")
-            .build();
+    private final RestClient restClient;
     private final String apiKey;
 
-    public OpenWeatherGeocodingClient(Environment environment) {
+    public OpenWeatherGeocodingClient(RestClient restClient, Environment environment) {
+        this.restClient = restClient;
         this.apiKey = environment.getRequiredProperty("OPENWEATHER_API_KEY");
     }
 
