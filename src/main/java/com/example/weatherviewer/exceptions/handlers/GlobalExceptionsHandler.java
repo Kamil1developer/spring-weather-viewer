@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.security.auth.login.LoginException;
 import java.util.List;
@@ -31,9 +32,13 @@ public class GlobalExceptionsHandler {
     }
     @ExceptionHandler(HandlerMethodValidationException.class)
     public String handleMethodValidation(Model model){
-
         model.addAttribute("validationError", true);
         return "search-results";
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public String handleNotFound(){
+        return "error";
     }
 
 }
