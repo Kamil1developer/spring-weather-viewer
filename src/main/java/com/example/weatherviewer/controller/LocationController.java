@@ -4,7 +4,6 @@ import com.example.weatherviewer.client.dto.LocationResponse;
 import com.example.weatherviewer.form.DeleteLocationForm;
 import com.example.weatherviewer.form.LocationForm;
 import com.example.weatherviewer.service.LocationService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

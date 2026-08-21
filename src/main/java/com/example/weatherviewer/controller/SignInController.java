@@ -2,7 +2,6 @@ package com.example.weatherviewer.controller;
 
 import com.example.weatherviewer.auth.AuthResult;
 import com.example.weatherviewer.form.LoginForm;
-import com.example.weatherviewer.form.RegisterForm;
 import com.example.weatherviewer.mapper.AuthViewMapper;
 import com.example.weatherviewer.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,10 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.time.Duration;
-import java.util.Optional;
-import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor

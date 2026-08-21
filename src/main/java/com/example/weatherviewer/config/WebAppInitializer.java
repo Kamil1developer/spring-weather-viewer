@@ -1,6 +1,5 @@
 package com.example.weatherviewer.config;
 
-import com.example.weatherviewer.filter.SessionAuthenticationFilter;
 import jakarta.servlet.Filter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;

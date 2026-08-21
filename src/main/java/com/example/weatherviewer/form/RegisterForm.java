@@ -19,6 +19,10 @@ public class RegisterForm {
 
     @NotBlank(message = "Пароль не должен быть пустым")
     @Size(min = 4, message = "Пароль должен быть минимум 4 символа.")
+    @Pattern(
+            regexp = "^[A-Za-z]+$",
+            message = "Пароль должен содержать только латинские буквы"
+    )
     private  String password;
 
     @NotBlank(message = "Пароль не должен быть пустым")

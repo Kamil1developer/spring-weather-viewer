@@ -41,6 +41,10 @@ public class SessionAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         }
+        if (sessionId == null){
+            response.sendRedirect(request.getContextPath() + SIGN_IN_PATH + "?reason=authentication-required");
+            filterChain.doFilter(request, response);
+        }
 
         if (PUBLIC_URLS.stream().anyMatch(url ->url.contains(path)) &&
                 !path.equals("/sign-in") &&
